@@ -14,15 +14,17 @@ class CreateAccountsTable extends Migration
     public function up()
     {
         Schema::create('t_orm_account', function (Blueprint $table) {
+			$table->bigInteger('id')->unsigned();
+			
             $table->string('facebook_login', 127);
 			
-            $table->string('name', 127);
-			$table->string('patronymic', 127);
-			$table->string('surname', 127);
+            $table->string('first_name', 127);
+			$table->string('middle_name', 127);
+			$table->string('last_name', 127);
 			
 			$table->string('description', 127)->nullable();
 			
-			$table->primary('facebook_login');
+			$table->primary('id');
         });
     }
 

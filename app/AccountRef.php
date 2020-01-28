@@ -10,10 +10,10 @@ class AccountRef extends Model
 		
 	public $timestamps = false;
 	
-	protected $fillable = ['facebook_login', 'reference', 'is_telegram', 'is_active'];
+	protected $fillable = ['account_id', 'reference', 'is_telegram', 'is_active'];
 	
 	public function account()
 	{
-		return $this->belongsTo('App\Account', 'facebook_login', 'facebook_login');
+		return $this->belongsTo('App\Account', 'account_id', 'id');
 	}
 }

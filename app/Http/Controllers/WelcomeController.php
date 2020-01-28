@@ -35,7 +35,7 @@ class WelcomeController extends Controller
 		if ($this->HasSessionData())
 		{
 			$squery = new SearchQuery;
-			$squery->facebook_login = $this->GetSessionData();
+			$squery->account_id = $this->GetSessionData();
 			$squery->self_position_id = $request->post('self_position');
 			$squery->search_position_id = $request->post('search_position');
 			$squery->event_id = $request->post('event');
@@ -53,11 +53,14 @@ class WelcomeController extends Controller
 		{
 			foreach($request->post('name') as $item)
 			{
-				$accountRef = new AccountRef;
-				$accountRef->facebook_login = $this->GetSessionData();
-				$accountRef->reference = $item;
-				$accountRef->is_telegram = $this->IsTelegram($accountRef->reference);		
-				$accountRef->save();				
+				if (!empty($item))
+				{
+					$accountRef = new AccountRef;
+					$accountRef->account_id = $this->GetSessionData();
+					$accountRef->reference = $item;
+					$accountRef->is_telegram = $this->IsTelegram($accountRef->reference);		
+					$accountRef->save();					
+				}				
 			}
 			return $this->commonMainLogic();
 		}		

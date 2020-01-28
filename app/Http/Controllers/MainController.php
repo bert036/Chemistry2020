@@ -26,7 +26,7 @@ class MainController extends Controller
 			$query->update(['is_active' => false]);	
 		
 			$squery = new SearchQuery;
-			$squery->facebook_login = $this->GetSessionData();
+			$squery->account_id = $this->GetSessionData();
 			$squery->self_position_id = $request->post('self_position');
 			$squery->search_position_id = $request->post('search_position');
 			$squery->event_id = $request->post('event');
@@ -43,7 +43,7 @@ class MainController extends Controller
 		if ($this->HasSessionData())
 		{
 			$new = $request->post('name');			
-			$existing = AccountRef::where('facebook_login', $this->GetSessionData())->where('is_active', 1)->get();
+			$existing = AccountRef::where('account_id', $this->GetSessionData())->where('is_active', 1)->get();
 			
 			foreach($existing as $item)
 			{
@@ -57,10 +57,10 @@ class MainController extends Controller
 			
 			foreach($request->post('name') as $item)
 			{
-				if (!in_array($item, $refs))
+				if (!in_array($item, $refs) && !empty($item))
 				{
 					$accountRef = new AccountRef;
-					$accountRef->facebook_login = $this->GetSessionData();
+					$accountRef->account_id = $this->GetSessionData();
 					$accountRef->reference = $item;
 					$accountRef->is_telegram = $this->IsTelegram($accountRef->reference);		
 					$accountRef->save();					

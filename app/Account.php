@@ -12,15 +12,15 @@ class Account extends Model
 	
 	public $incrementing = false;
 
-	protected $fillable = ['facebook_login', 'name', 'patronymic', 'surname', 'description'];
+	protected $fillable = ['id', 'facebook_login', 'first_name', 'middle_name', 'last_name', 'description'];
 	
 	public function accountRefs()
 	{
-		return $this->hasMany('App\AccountRef', 'facebook_login', 'facebook_login')->where('is_active', true);
+		return $this->hasMany('App\AccountRef', 'account_id', 'id')->where('is_active', true);
 	}
 	
 	public function searchQueries()
 	{
-		return $this->hasMany('App\SearchQuery', 'facebook_login', 'facebook_login');
+		return $this->hasMany('App\SearchQuery', 'account_id', 'id');
 	}
 }

@@ -45,7 +45,7 @@ class Controller extends BaseController
 	{
 		if ($this->HasSessionData())
 		{
-			$squeries = SearchQuery::where('facebook_login', $this->GetSessionData())->get();
+			$squeries = SearchQuery::where('account_id', $this->GetSessionData())->get();
 			
 			if ($squeries->isEmpty())
 			{		
@@ -66,7 +66,7 @@ class Controller extends BaseController
 	{
 		if ($this->HasSessionData())
 		{
-			$refs = AccountRef::where('facebook_login', $this->GetSessionData())->get();
+			$refs = AccountRef::where('account_id', $this->GetSessionData())->get();
 			
 			if ($refs->isEmpty())
 			{
@@ -84,19 +84,19 @@ class Controller extends BaseController
 	
 	public function commonMainLogic()
 	{
-		$account = Account::with('searchQueries')->with('accountRefs')->where('facebook_login', $this->GetSessionData())->first();
+		$account = Account::with('searchQueries')->with('accountRefs')->where('id', $this->GetSessionData())->first();
 		$currentSearch = $account->searchQueries->where('is_active', 1)->first();
 		
 		$fittedLogins = DB::table('t_orm_search_query')->where('is_active', 1)->where('search_position_id', $currentSearch->self_position_id)
-		->where('self_position_id', $currentSearch->search_position_id)->where('event_id', $currentSearch->event_id)->pluck('facebook_login');
+		->where('self_position_id', $currentSearch->search_position_id)->where('event_id', $currentSearch->event_id)->pluck('account_id');
 		
-		$accounts = Account::with('accountRefs')->whereIn('facebook_login', $fittedLogins)->simplePaginate(1);		
+		$accounts = Account::with('accountRefs')->whereIn('id', $fittedLogins)->simplePaginate(1);		
 		return view('main.index')->with('accounts', $accounts);
 	}
 	
 	public function commonMainSettings()
 	{
-		$account = Account::with('searchQueries')->with('accountRefs')->where('facebook_login', $this->GetSessionData())->first();
+		$account = Account::with('searchQueries')->with('accountRefs')->where('id', $this->GetSessionData())->first();
 
 		$events = Event::where('is_active', 1)->get()->toArray();
 		$eventsKvps = array_column($events, 'description', 'id');

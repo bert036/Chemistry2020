@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Socialite;
+use Image;
 use App\Account;
 use App\SearchQuery;
 use App\Event;
@@ -14,13 +15,13 @@ class SocialFaceBookController extends Controller
 {
 	public function test()
 	{
-		return $this->createOrUpdate('mail@yandex.ru', 'Петр', 'Степанович', 'Зощенко');
+		//https://graph.facebook.com/1232423/picture?type=small
+		return $this->createOrUpdate(1232423, 'mail@yandex.ru', 'Петр', 'Степанович', 'Зощенко');
 	}
 
 
 	public function redirectToProvider()
 	{
-		//return $this->createOrUpdate('2@1.ru', '11', '22', '33');
 		return Socialite::driver('facebook')->redirect();
 	}
 
@@ -31,21 +32,38 @@ class SocialFaceBookController extends Controller
 		// handle not registered case
 		// return error view
 		
-		// otherwise go further		
-		return $this->createOrUpdate($user->user['email'], $user->user['first_name'], 
+		// otherwise go further
+		
+		return $this->createOrUpdate(
+		$user->user['id'],
+		$user->user['email'],
+		$user->user['first_name'], 
 		'',//$user->user['middle_name'], 
 		$user->user['last_name']);
 	}
 	
-	public function createOrUpdate($email, $fname, $mname, $lname)
+	public function createOrUpdate($id, $email, $fname, $mname, $lname)
 	{
 		$account = Account::updateOrCreate(
-			['facebook_login' => $email],
-			['name' => $fname, 'patronymic' => $mname, 'surname' => $lname]
+			['id' => $id],
+			['facebook_login' => $email,
+			'first_name' => $fname,
+			'middle_name' => $mname,
+			'last_name' => $lname]
 		);
 		
-		$this->SetSessionData($email);
+		$this->savePhoto($id);
+		
+		$this->SetSessionData($id);
 
 		return $this->commonStep1Logic();
+	}
+	
+	public function savePhoto($id)
+	{
+		$arrContextOptions=['ssl'=>['verify_peer'=>false,'verify_peer_name'=>false]];
+		$fbUrl = 'https://graph.facebook.com/'.$id.'/picture?type=small';
+		$file = 'profile_'.$id.'.jpg';
+		$img = Image::make(file_get_contents($fbUrl, false, stream_context_create($arrContextOptions)))->save('..\\storage\\app\\public\\img\\'.$file);
 	}
 }
