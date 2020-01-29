@@ -4,7 +4,7 @@
 <h1>Настройки</h1>
 
 <div> {{ $account->first_name }} {{ $account->middle_name }} {{ $account->last_name }}</div>
-<image width="100px" height="100px" background="red" src="{{ asset('storage/img/profile_'.$account->id.'.jpg') }}"></image>
+<image width="100px" height="100px" background="red" src="{{ '/storage/profile_'.$account->id.'.jpg' }}"></image>
 
 <h1>Параметры поиска</h1>
 

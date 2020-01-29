@@ -63,6 +63,6 @@ class SocialFaceBookController extends Controller
 		$arrContextOptions=['ssl'=>['verify_peer'=>false,'verify_peer_name'=>false]];
 		$fbUrl = 'https://graph.facebook.com/'.$id.'/picture?type=small';
 		$file = 'profile_'.$id.'.jpg';
-		file_put_contents('..\\storage\\app\\public\\img\\'.$file, fopen($fbUrl, 'r'));
+		file_put_contents('storage/'.$file, fopen($fbUrl, 'r'));
 	}
 }
