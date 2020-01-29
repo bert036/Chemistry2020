@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Socialite;
-use Image;
 use App\Account;
 use App\SearchQuery;
 use App\Event;
@@ -64,6 +63,6 @@ class SocialFaceBookController extends Controller
 		$arrContextOptions=['ssl'=>['verify_peer'=>false,'verify_peer_name'=>false]];
 		$fbUrl = 'https://graph.facebook.com/'.$id.'/picture?type=small';
 		$file = 'profile_'.$id.'.jpg';
-		$img = Image::make(file_get_contents($fbUrl, false, stream_context_create($arrContextOptions)))->save('..\\storage\\app\\public\\img\\'.$file);
+		file_put_contents('..\\storage\\app\\public\\img\\'.$file, fopen($fbUrl, 'r'));
 	}
 }
