@@ -21,7 +21,7 @@ Route::get('logout', 'WelcomeController@logout')->name('welcome.logout');
 Route::post('step2', 'WelcomeController@step2')->name('welcome.step2');
 Route::post('step3', 'WelcomeController@step3')->name('welcome.step3');
 
-Route::get('auth/test', 'SocialFaceBookController@test')->name('auth.test');
+Route::get('/test', 'SocialFaceBookController@test')->name('auth.test');
 Route::get('auth/facebook', 'SocialFaceBookController@redirectToProvider')->name('auth.facebook');
 Route::get('auth/facebook/callback', 'SocialFaceBookController@handleProviderCallback');
 

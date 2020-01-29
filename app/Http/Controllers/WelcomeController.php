@@ -11,7 +11,7 @@ class WelcomeController extends Controller
 {
 	function index()
 	{
-		return view('welcome.index');
+		return $this->commonStep0Logic();
 	}
 	
 	function about()

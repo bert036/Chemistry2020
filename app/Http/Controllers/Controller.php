@@ -41,6 +41,18 @@ class Controller extends BaseController
 		Session::forget($key);
 	}	
 	
+	public function commonStep0Logic()
+	{
+		if ($this->HasSessionData())
+		{
+			return $this->commonStep1Logic();
+		}
+		else
+		{
+			return view('welcome.index');			
+		}
+	}
+	
 	public function commonStep1Logic()
 	{
 		if ($this->HasSessionData())

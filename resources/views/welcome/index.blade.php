@@ -10,10 +10,6 @@
             через Facebook
         </div>
 
-        <div class="auth__type typo typo_h1">
-            <a href="{{ route('auth.test') }}">Тест</a>
-        </div>
-
     </div>
 </div>
 
