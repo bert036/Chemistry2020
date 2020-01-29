@@ -1,83 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Настройки</h1>
 
-<div> {{ $account->first_name }} {{ $account->middle_name }} {{ $account->last_name }}</div>
-<image width="100px" height="100px" background="red" src="{{ '/storage/profile_'.$account->id.'.jpg' }}"></image>
+<div class="content">
+    <div class="settings">
+        <div class="settings__colLeft">
+            <div class="settings__avatar"><img src="{{ '/storage/profile_'.$account->id.'.jpg' }}"/></div>
+        </div>
+		<div class="settings__colRight">
+            <div class="settings__name typo typo_h2">{{ $account->first_name }} {{ $account->middle_name }} {{ $account->last_name }}</div>
 
-<h1>Параметры поиска</h1>
+			{!! Form::open(['route' => 'main.updatesearch', 'class' => 'form']) !!}
+            <div class="settings__search typo typo_h3">
+                {{ Form::hidden('currentSearchQueryId', $currentSearch->id) }}
 
-<div class="row">
-	<div class="col">
+                Я {!! Form::select('self_position', $positions, $currentSearch->self_position_id) !!}, ищу {!! Form::select('search_position', $positions, $currentSearch->search_position_id) !!} на {!! Form::select('event', $events, $currentSearch->event_id) !!}
+            </div>
+            <div class="settings__about typo typo_h3">
+                {!! Form::textarea('description', $currentSearch->description,['class' => 'form-control input-lg','placeholder' => 'Возможно, вам есть что добавить?', 'cols' => '', 'rows' => '']) !!}
+            </div>
+            {!! Form::submit('Сохранить', ['class' => 'button']) !!}
+            {!! Form::close() !!}
 
-		{!! Form::open(['route' => 'main.updatesearch', 'class' => 'form']) !!}
+            {!! Form::open(['route' => 'main.updaterefs', 'class' => 'form']) !!}
+            <div class="settings__contacts">
+                <table id="dynamic_table">
 
-		<div class="form-group">
-			{!! Form::label('self_position', 'Я',['class' => 'control-label']) !!}
-			{!! Form::select('self_position', $positions, $currentSearch->self_position_id) !!}
-		</div>
-		
-		{{ Form::hidden('currentSearchQueryId', $currentSearch->id) }}
+                @forelse ($account->accountRefs as $ref)
+                    <tr>
+                        <td><button type="button" class="settings__minus" onclick="document.getElementById('dynamic_table').deleteRow(parentNode.parentNode.rowIndex);"></button></td>
+                        <td><input name="name[]" type="text" class="form-control" readonly="readonly" value="{{ $ref->reference }}"></input></td>
+                    </tr>
+                @empty
+                @endforelse
 
-		<div class="form-group">
-			{!! Form::label('search_position', 'Ищу',['class' => 'control-label']) !!}
-			{!! Form::select('search_position', $positions, $currentSearch->search_position_id) !!}
-		</div>
+                    <tr>
+                        <td><button id="add"  class="settings__plus" type="button"></button></td>
+                        <td><input name="name[]" type="text" class="form-control"></input></td>
+                    </tr>
+                </table>
+                {!! Form::submit('Сохранить', ['class' => 'button']) !!}
+            </div>
+    		{!! Form::close() !!}
+            <a class="settings__exit typo typo_h3" href="{{ route('welcome.logout') }}">Выйти</a>
+        </div>
 
-		<div class="form-group">
-			{!! Form::label('event', 'Событие',['class' => 'control-label']) !!}
-			{!! Form::select('event', $events, $currentSearch->event_id) !!}
-		</div>
-
-		<div class="form-group">
-			{!! Form::label('description', 'Описание',['class' => 'control-label']) !!} <br/>
-			{!! Form::textarea('description', $currentSearch->description,['class' => 'form-control input-lg','placeholder' => 'Возможно, вам есть что добавить?']) !!}
-		</div>
-		
-		<div class="form-group">
-			{!! Form::submit('Обновить', ['class' => 'btn btn-info btn-lg', 'style' => 'width: 30%']) !!}
-		</div>
-
-		{!! Form::close() !!}
-
-	</div>
-</div>
-
-<h1>Контакты</h1>
-
-<div class="row">
-	<div class="col">
-
-		{!! Form::open(['route' => 'main.updaterefs', 'class' => 'form']) !!}
-
-		<table id="dynamic_table">
-			
-			
-		@forelse ($account->accountRefs as $ref)
-			<tr>
-				<td><input name="name[]" type="text" class="form-control" readonly="readonly" value="{{ $ref->reference }}"></input></td>
-				<td><button type="button" onclick="document.getElementById('dynamic_table').deleteRow(parentNode.parentNode.rowIndex);">-</button></td>
-			</tr>
-		@empty
-		@endforelse
-		
-			<tr>
-				<td><input name="name[]" type="text" class="form-control"></input></td>
-				<td><button id="add" type="button" >+</button></td>
-			</tr>
-		</table>	
-		
-		<div class="form-group">
-			{!! Form::submit('Обновить', ['class' => 'btn btn-info btn-lg', 'style' => 'width: 30%']) !!}
-		</div>		
-
-		{!! Form::close() !!}
 	</div>
 </div>
 
 @endsection
-
 
 @section('jscontent')
 <script>
@@ -95,7 +66,7 @@ document.getElementById("add").addEventListener("click", function()
 	newInput.type = "text";
 	newInput.class = "form-control";
 	newCell1.appendChild(newInput);
-	
+
 	// Button column
 	var newCell2 = row.insertCell(-1);
 	var newButton = document.createElement("button");
@@ -107,7 +78,7 @@ document.getElementById("add").addEventListener("click", function()
 		table.deleteRow(rowToDelete.rowIndex);
 	});
 	newCell2.appendChild(newButton);
-	
+
 	i++;
 });
 </script>

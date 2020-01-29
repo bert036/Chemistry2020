@@ -59,11 +59,12 @@ body{
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    position: relative;
 }
 
 html, body{
     padding: 0;
-    min-height: 100%;
+    min-height: 100vh;
     overflow-x: hidden;
 }
 
@@ -103,6 +104,16 @@ a{
         }
     }
 
+    &_h3{
+        font-size: 18px;
+        line-height: 24px;
+
+        @media screen and (max-width: 960px) {
+            font-size: 16px;
+            line-height: 22px;
+        }
+    }
+
     &_body{
         font-size: 14px;
         line-height: 20px;
@@ -116,15 +127,42 @@ a{
     display: inline-block;
     font-size: 14px;
     line-height: 56px;
+    height: 56px;
     padding: 0 40px;
     background: #000;
     color: #fff;
     text-align: center;
+    cursor: pointer;
 
     &:hover{
         background: #0047FF;
         color: #fff;
     }
+
+    &_icon{
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        background: #c4c4c4;
+        color: #000;
+    }
+}
+
+select{
+    font-size: 14px;
+    line-height: 20px;
+    background: #fff;
+    color: #0047FF;
+    -webkit-appearance:none;
+}
+
+textarea{
+    font-size: 14px;
+    line-height: 20px;
+    background: #fff;
+    color: #000;
+    -webkit-appearance:none;
 }
 
 /* Header */
@@ -159,7 +197,7 @@ a{
 
     @media screen and (max-width: 960px) {
         width: 100%;
-        padding: 80px 24px;
+        padding: 80px 24px 128px 24px;
     }
 }
 
@@ -168,15 +206,23 @@ a{
 .nav{
     display: flex;
     flex-flow: row nowrap;
-    width: 320px;
     justify-content: space-between;
     height: 56px;
     position: absolute;
+    width: 320px;
     right: 80px;
     top: 12px;
+    background: #fff;
 
     @media screen and (max-width: 960px) {
-
+        position: fixed;
+        width: 100%;
+        right: auto;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
     }
 
     &__item{
@@ -227,6 +273,69 @@ a{
 
 }
 
+/* Results */
+
+.results{
+    &__list{
+        display: flex;
+        flex-flow: row wrap;
+        margin: 64px -12px 0 -12px;
+    }
+
+    @media screen and (max-width: 960px) {
+        flex-flow: column wrap;
+        margin: 0;
+    }
+
+    &__nav{
+        & ul.pagination{
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            list-style: none;
+        }
+        & ul.pagination li{
+            display: inline-block;
+
+            &:last-child{
+                margin-left: 24px;
+            }
+        }
+    }
+}
+
+.card{
+    width: 25%;
+    padding: 0 12px 40px 12px;
+
+    @media screen and (max-width: 960px) {
+        width: 100%;
+        padding: 0 0 40px 0;
+    }
+
+    &__avatar{
+        width: 100%;
+        margin-bottom: 16px;
+
+        @media screen and (max-width: 960px) {
+            width: auto;
+            margin: 0 -24px 16px -24px;
+        }
+
+        & img{
+            width: 100%;
+            min-height: 200px;
+        }
+    }
+
+    &__name{
+        margin-bottom: 8px;
+    }
+
+    &__contacts{
+        margin-top: 32px;
+    }
+}
 /* About */
 
 .about{
@@ -235,7 +344,137 @@ a{
     }
 
     & .button{
-        width: 280px;
         margin-top: 64px;
+    }
+}
+
+/* Settings */
+
+.settings{
+    display: flex;
+    flex-flow: row nowrap;
+
+    @media screen and (max-width: 960px) {
+        flex-flow: column nowrap;
+    }
+
+    &__colLeft{
+        width: 25%;
+
+        @media screen and (max-width: 960px) {
+            width: 100%;
+            margin-bottom: 40px;
+        }
+    }
+
+    &__colRight{
+        width: 75%;
+        padding-left: 56px;
+
+        @media screen and (max-width: 960px) {
+            width: 100%;
+            padding-left: 0;
+        }
+    }
+
+    &__avatar{
+        width: 100%;
+
+        & img{
+            width: 100%;
+            min-height: 200px;
+        }
+    }
+
+    &__name{
+        margin-bottom: 8px;
+    }
+
+    &__search{
+        margin-bottom: 32px;
+    }
+
+    &__about{
+        margin-bottom: 16px;
+
+        & textarea{
+            width: 100%;
+            min-height: 80px;
+            font-size: 18px;
+            line-height: 24px;
+
+            @media screen and (max-width: 960px) {
+                font-size: 16px;
+                line-height: 22px;
+            }
+        }
+    }
+
+    & select{
+        font-size: 18px;
+        line-height: 24px;
+
+        @media screen and (max-width: 960px) {
+            font-size: 16px;
+            line-height: 22px;
+        }
+    }
+
+    &__contacts{
+        margin-top: 40px;
+
+        & #dynamic_table{
+            width: 100%;
+            margin-bottom: 16px;
+
+            & td:nth-child(1){
+                width: 24px;
+            }
+
+            & td{
+                padding-bottom: 8px;
+            }
+        }
+
+        & button{
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #fff;
+            background-size: 24px;
+            width: 24px;
+            height: 24px;
+            border: none;
+            margin-right: 8px;
+            cursor: pointer;
+
+            &.settings__minus{
+                opacity: 0.3;
+                background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC4zMzk1IDE3LjMzOTVMNi44NjE2OCAxNS44NjE3TDEwLjcwNDMgMTIuMDE5TDYuODQyNjUgOC4xNTczNUw4LjM0OTc0IDYuNjUwMjZMMTIuMjExNCAxMC41MTE5TDE2LjA1NDEgNi42NjkzTDE3LjUzMTkgOC4xNDcxMkwxMy42ODkyIDExLjk4OThMMTcuNTQyMSAxNS44NDI2TDE2LjAzNSAxNy4zNDk3TDEyLjE4MjEgMTMuNDk2OUw4LjMzOTUgMTcuMzM5NVoiIGZpbGw9ImJsYWNrIi8+PC9zdmc+);
+
+                &:hover{
+                    opacity: 1;
+                }
+            }
+            &.settings__plus{
+                background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNS42OTMzNiAxMy4wNTEyVjEwLjk2MTJIMTEuMTI3N1Y1LjVIMTMuMjU5VjEwLjk2MTJIMTguNjkzNFYxMy4wNTEySDEzLjI1OVYxOC41SDExLjEyNzdWMTMuMDUxMkg1LjY5MzM2WiIgZmlsbD0iIzAwNDdGRiIvPjwvc3ZnPg==);
+            }
+        }
+
+        & input[type="text"]{
+            width: 100%;
+            font-size: 18px;
+            line-height: 24px;
+
+            @media screen and (max-width: 960px) {
+                font-size: 16px;
+                line-height: 22px;
+            }
+        }
+    }
+
+    &__exit{
+        display: inline-block;
+        margin-top: 40px;
+        color: #EB5757;
     }
 }

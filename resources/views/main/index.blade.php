@@ -22,6 +22,9 @@
             <div class="typo typo_h2">Пустота.</div>
             @endforelse
         </div>
+        <div class="results__nav typo typo_h3">
+            {{ $accounts->links() }}
+        </div>
     </div>
 </div>
 
