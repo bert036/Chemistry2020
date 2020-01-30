@@ -39,6 +39,7 @@ class PositionsController extends Controller
 		$position = new Position;
 		$position->description = $request->post('description');
 		$position->order = $request->post('order');
+		$position->ending = $request->post('ending');
 		$position->save();
 
 		return redirect()->route('positions.index');
@@ -79,7 +80,8 @@ class PositionsController extends Controller
 		$position = Position::findOrFail($id);
 		$position->update([
 		'description' => $request->post('description'),
-		'order' => $request->post('order')]);		
+		'order' => $request->post('order'),
+		'ending' => $request->post('ending')]);		
 		return redirect()->route('positions.index');
     }
 

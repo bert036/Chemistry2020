@@ -14,7 +14,7 @@
             <div class="settings__search typo typo_h3">
                 {{ Form::hidden('currentSearchQueryId', $currentSearch->id) }}
 
-                Я {!! Form::select('self_position', $positions, $currentSearch->self_position_id) !!}, ищу {!! Form::select('search_position', $positions, $currentSearch->search_position_id) !!} на {!! Form::select('event', $events, $currentSearch->event_id) !!}
+                Я {!! Form::select('self_position', $positions, $currentSearch->self_position_id) !!}, ищу {!! Form::select('search_position', $positionsWithEndings, $currentSearch->search_position_id) !!} на {!! Form::select('event', $events, $currentSearch->event_id) !!}
             </div>
             <div class="settings__about typo typo_h3">
                 {!! Form::textarea('description', $currentSearch->description,['class' => 'form-control input-lg','placeholder' => 'Возможно, вам есть что добавить?', 'cols' => '', 'rows' => '']) !!}

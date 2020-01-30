@@ -14,10 +14,15 @@
 		</div>
 		
 		<div class="form-group">
-			{!! Form::label('Order', 'Вес',['class' => 'control-label']) !!} <br/>
+			{!! Form::label('order', 'Вес',['class' => 'control-label']) !!} <br/>
 			{!! Form::text('order', null,['class' => 'form-control input-lg','placeholder' => 'Вес позиции ...']) !!}
 		</div>
 
+		<div class="form-group">
+			{!! Form::label('ending', 'Окончание', ['class' => 'control-label']) !!}
+			{!! Form::text('ending', 'а',['class' => 'form-control input-lg','placeholder' => 'Окончание Род. падеж ...']) !!}
+		</div>
+		
 		<div class="form-group">
 			{!! Form::submit('Создать', ['class' => 'btn btn-info btn-lg', 'style' => 'width: 30%']) !!}
 		</div>

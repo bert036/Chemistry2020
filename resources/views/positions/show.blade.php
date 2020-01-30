@@ -7,6 +7,7 @@
 <p>
 Описание: {{ $position->description }} <br />
 Вес: {{ $position->order }}
+Окончание: {{ $position->ending }}
 </p>
 
 @endsection

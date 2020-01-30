@@ -18,6 +18,7 @@ class CreatePositionsTable extends Migration
 			$table->string('description', 127);
 			$table->unsignedTinyInteger('order')->default(0);
 			$table->boolean('is_active')->default(true);
+			$table->string('ending', 7)->default('а');
         });
     }
 

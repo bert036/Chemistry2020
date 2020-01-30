@@ -12,6 +12,7 @@
 <tr>
 <td>{{ $position->description }}</td>
 <td>{{ $position->order }}</td>
+<td>Окончание: {{ $position->ending }}</td>
 <td>
 {!! Form::open(['route' => ['positions.edit', $position], 'method' => 'get']) !!}
 {!! Form::submit('Редактировать', ['class' => 'btn btn-danger']) !!}

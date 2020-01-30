@@ -16,7 +16,7 @@
 
 		<div class="form-group">
 			{!! Form::label('search_position', 'Ищу',['class' => 'control-label']) !!}
-			{!! Form::select('search_position', $positions, '2') !!}
+			{!! Form::select('search_position', $positionsWithEndings, '2') !!}
 		</div>
 
 		<div class="form-group">

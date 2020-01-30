@@ -19,6 +19,11 @@
 		</div>
 		
 		<div class="form-group">
+			{!! Form::label('ending', 'Окончание', ['class' => 'control-label']) !!}
+			{!! Form::text('ending', null,['class' => 'form-control input-lg','placeholder' => 'Окончание Род. падеж ...']) !!}
+		</div>
+		
+		<div class="form-group">
 			{!! Form::submit('Обновить', ['class' => 'btn btn-info btn-lg', 'style' => 'width: 30%']) !!}
 		</div>
 		

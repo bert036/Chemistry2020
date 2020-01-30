@@ -64,10 +64,22 @@ class Controller extends BaseController
 				$events = Event::where('is_active', 1)->get()->toArray();
 				$eventsKvps = array_column($events, 'description', 'id');
 				
-				$positions = Position::where('is_active', 1)->get()->toArray();
-				$positionsKvps = array_column($positions, 'description', 'id');
+				$positions = Position::where('is_active', 1)->get();
+				$positionsKvps = array_column($positions->toArray(), 'description', 'id');
 				
-				return view('welcome.step1')->with('events', $eventsKvps)->with('positions', $positionsKvps);	
+				$positionsWithEndingsKvps = array();
+				
+				foreach($positions as $item)
+				{
+					if ($item)
+					{
+						$positionsWithEndingsKvps[$item->id] = $item->description . $item->ending;
+					}
+				}			
+				
+				return view('welcome.step1')->with('events', $eventsKvps)->
+				with('positions', $positionsKvps)->
+				with('positionsWithEndings', $positionsWithEndingsKvps);	
 			}			
 			return $this->commonStep2Logic();
 		}		
@@ -113,11 +125,23 @@ class Controller extends BaseController
 		$events = Event::where('is_active', 1)->get()->toArray();
 		$eventsKvps = array_column($events, 'description', 'id');
 
-		$positions = Position::where('is_active', 1)->get()->toArray();
-		$positionsKvps = array_column($positions, 'description', 'id');
+		$positions = Position::where('is_active', 1)->get();
+		$positionsKvps = array_column($positions->toArray(), 'description', 'id');
 
+		$positionsWithEndingsKvps = array();	
+		foreach($positions as $item)
+		{
+			if ($item)
+			{
+				$positionsWithEndingsKvps[$item->id] = $item->description . $item->ending;
+			}
+		}			
+			
 		$currentSearch = $account->searchQueries->where('is_active', 1)->first();
 
-		return view('main.settings')->with('events', $eventsKvps)->with('positions', $positionsKvps)->with('account', $account)->with('currentSearch', $currentSearch);
+		return view('main.settings')->with('events', $eventsKvps)->
+		with('positions', $positionsKvps)->
+		with('account', $account)->
+		with('currentSearch', $currentSearch)->with('positionsWithEndings', $positionsWithEndingsKvps);
 	}
 }
