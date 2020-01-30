@@ -23,7 +23,7 @@ class Controller extends BaseController
 	
 	public function HasSessionData($key = 'id')
 	{
-		return Session::has($key);
+		return Session::has($key) && Account::where('id', '=', $this->GetSessionData())->count() > 0;
 	}
 	
 	public function GetSessionData($key = 'id')
