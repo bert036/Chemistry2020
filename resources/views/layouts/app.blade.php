@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/app.css') }}">
+    <meta name="description" content="Пусть между вами будет химия.">
+    <meta name="keywords" content="химия, поиск, арт-директор, копирайтер">
 </head>
 <body>
 
