@@ -2,26 +2,25 @@
 
 @section('content')
 
-<h1>Как с вами связаться</h1>
+<div class="bar bar_1"></div>
 
-<div class="row">
-	<div class="col">
-
+<div class="content">
+    <div class="search typo typo_h1">
+        <div class="typo typo_h1">Мои контакты</div>
 		{!! Form::open(['route' => 'welcome.step3'], ['class' => 'form']) !!}
-
-		<table id="dynamic_table">
-			<tr>
-				<td><input name="name[]" type="text" class="form-control"></input></td>
-				<td><button id="add" type="button">+</button></td>
-			</tr>
-		</table>	
-		
-		<div class="form-group">
-			{!! Form::submit('Далее', ['class' => 'btn btn-info btn-lg', 'style' => 'width: 30%']) !!}
-		</div>		
-
+        <div class="settings__contacts">
+            <table id="dynamic_table">
+                <tbody>
+                    <tr>
+                        <td><button id="add" class="settings__plus"></button></td>
+                        <td><input name="name[]" type="text" placeholder="Ссылка на контакты"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {!! Form::submit() !!}
 		{!! Form::close() !!}
-	</div>
+    </div>
 </div>
 
 @endsection
@@ -42,7 +41,7 @@ document.getElementById("add").addEventListener("click", function()
 	newInput.type = "text";
 	newInput.class = "form-control";
 	newCell1.appendChild(newInput);
-	
+
 	// Button column
 	var newCell2 = row.insertCell(-1);
 	var newButton = document.createElement("button");
@@ -54,9 +53,8 @@ document.getElementById("add").addEventListener("click", function()
 		table.deleteRow(rowToDelete.rowIndex);
 	});
 	newCell2.appendChild(newButton);
-	
+
 	i++;
 });
 </script>
 @endsection
-

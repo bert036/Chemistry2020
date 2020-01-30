@@ -199,16 +199,51 @@ textarea {
   display: block; }
 
 /* Search form */
+.search select {
+  font-size: 54px;
+  line-height: 64px; }
+  @media screen and (max-width: 960px) {
+    .search select {
+      font-size: 24px;
+      line-height: 28px; } }
+
+.search input[type=submit] {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 100%;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzMiIGhlaWdodD0iMzEiIHZpZXdCb3g9IjAgMCAzMyAzMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE5LjM1MzMgMS4zNDcwMkwzMi4wODEyIDE0LjA3NDlDMzIuODYyMyAxNC44NTYgMzIuODYyMyAxNi4xMjIzIDMyLjA4MTIgMTYuOTAzNEwxOS4zNTMzIDI5LjYzMTNDMTguNTcyMiAzMC40MTIzIDE3LjMwNTkgMzAuNDEyMyAxNi41MjQ5IDI5LjYzMTNDMTUuNzQzOCAyOC44NTAyIDE1Ljc0MzggMjcuNTgzOSAxNi41MjQ5IDI2LjgwMjlMMjUuODM4NiAxNy40ODkySDIuNjY2OTlDMS41NjI0MiAxNy40ODkyIDAuNjY2OTkyIDE2LjU5MzcgMC42NjY5OTIgMTUuNDg5MkMwLjY2Njk5MiAxNC4zODQ2IDEuNTYyNDIgMTMuNDg5MiAyLjY2Njk5IDEzLjQ4OTJIMjUuODM4NkwxNi41MjQ5IDQuMTc1NDRDMTUuNzQzOCAzLjM5NDQgMTUuNzQzOCAyLjEyODA3IDE2LjUyNDkgMS4zNDcwMkMxNy4zMDU5IDAuNTY1OTY4IDE4LjU3MjIgMC41NjU5NjggMTkuMzUzMyAxLjM0NzAyWiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=);
+  background-position: center;
+  background-size: 32px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin-top: 80px; }
+  @media screen and (max-width: 960px) {
+    .search input[type=submit] {
+      width: 64px;
+      height: 64px;
+      background-size: 24px;
+      margin: 0;
+      position: fixed;
+      bottom: 24px; } }
+  .search input[type=submit]:hover {
+    background-color: #0047FF;
+    color: #fff; }
+
 /* Results */
 .results__list {
   display: flex;
   flex-flow: row wrap;
   margin: 64px -12px 0 -12px; }
+  @media screen and (max-width: 960px) {
+    .results__list {
+      flex-flow: column wrap;
+      margin: 0; } }
 
-@media screen and (max-width: 960px) {
-  .results {
-    flex-flow: column wrap;
-    margin: 0; } }
+.results .typo_h2 {
+  margin-top: 64px; }
 
 .results__nav ul.pagination {
   display: flex;
@@ -335,3 +370,15 @@ textarea {
     display: inline-block;
     margin-top: 40px;
     color: #EB5757; }
+
+/* Bar */
+.bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 4px;
+  background-color: #000; }
+  .bar_1 {
+    width: 30%; }
+  .bar_2 {
+    width: 60%; }
