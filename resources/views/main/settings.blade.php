@@ -10,7 +10,7 @@
 		<div class="settings__colRight">
             <div class="settings__name typo typo_h2">{{ $account->first_name }} {{ $account->middle_name }} {{ $account->last_name }}</div>
 
-			{!! Form::open(['route' => 'main.updatesearch', 'class' => 'form']) !!}
+			{!! Form::open(['route' => 'main.update', 'class' => 'form']) !!}
             <div class="settings__search typo typo_h3">
                 {{ Form::hidden('currentSearchQueryId', $currentSearch->id) }}
 
@@ -19,11 +19,8 @@
             <div class="settings__about typo typo_h3">
                 {!! Form::textarea('description', $currentSearch->description,['class' => 'form-control input-lg','placeholder' => 'Возможно, вам есть что добавить?', 'cols' => '', 'rows' => '']) !!}
             </div>
-            {!! Form::submit('Сохранить', ['class' => 'button']) !!}
-            {!! Form::close() !!}
-
-            {!! Form::open(['route' => 'main.updaterefs', 'class' => 'form']) !!}
-            <div class="settings__contacts">
+            
+			<div class="settings__contacts">
                 <table id="dynamic_table">
 
                 @forelse ($account->accountRefs as $ref)
@@ -39,9 +36,12 @@
                         <td><input name="name[]" type="text" class="form-control"></input></td>
                     </tr>
                 </table>
-                {!! Form::submit('Сохранить', ['class' => 'button']) !!}
             </div>
-    		{!! Form::close() !!}
+			
+			
+			{!! Form::submit('Сохранить', ['class' => 'button']) !!}
+            {!! Form::close() !!}
+
             <a class="settings__exit typo typo_h3" href="{{ route('welcome.logout') }}">Выйти</a>
         </div>
 

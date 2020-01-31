@@ -18,30 +18,32 @@ class MainController extends Controller
 		return  $this->commonMainSettings();
 	}
 	
-	public function updateSearch(Request $request)
+	public function update(Request $request)
 	{		
 		if ($this->HasSessionData())
 		{
-			$query = SearchQuery::findOrFail($request->post('currentSearchQueryId'));
-			$query->update(['is_active' => false]);	
-		
-			$squery = new SearchQuery;
-			$squery->account_id = $this->GetSessionData();
-			$squery->self_position_id = $request->post('self_position');
-			$squery->search_position_id = $request->post('search_position');
-			$squery->event_id = $request->post('event');
-			$squery->description = $request->post('description');
-			$squery->save();
+			// Update search
 			
-			return  $this->commonMainSettings();
-		}		
-		return view('welcome.index');
-	}	
-	
-	public function updateRefs(Request $request)
-	{		
-		if ($this->HasSessionData())
-		{
+			$currentQuery = SearchQuery::findOrFail($request->post('currentSearchQueryId'));
+			
+			if ($currentQuery->self_position_id != $request->post('self_position') ||
+				$currentQuery->search_position_id != $request->post('search_position') ||
+				$currentQuery->event_id != $request->post('event') ||
+				$currentQuery->description != $request->post('description'))
+			{
+				$currentQuery->update(['is_active' => false]);
+							
+				$newQuery = new SearchQuery;
+				$newQuery->account_id = $this->GetSessionData();
+				$newQuery->self_position_id = $request->post('self_position');
+				$newQuery->search_position_id = $request->post('search_position');
+				$newQuery->event_id = $request->post('event');
+				$newQuery->description = $request->post('description');
+				$newQuery->save();	
+			}			
+			
+			// Update references
+			
 			$new = $request->post('name');			
 			$existing = AccountRef::where('account_id', $this->GetSessionData())->where('is_active', 1)->get();
 			

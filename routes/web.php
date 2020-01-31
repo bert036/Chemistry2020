@@ -28,10 +28,8 @@ Route::get('auth/facebook/callback', 'SocialFaceBookController@handleProviderCal
 Route::get('main', 'MainController@index')->name('main.index');
 Route::get('main/settings', 'MainController@settings')->name('main.settings');
 Route::get('main/about', 'MainController@about')->name('main.about');
-Route::get('main/updatesearch', 'MainController@index');
-Route::post('main/updatesearch', 'MainController@updatesearch')->name('main.updatesearch');
-Route::get('main/updaterefs', 'MainController@index');
-Route::post('main/updaterefs', 'MainController@updaterefs')->name('main.updaterefs');
+Route::get('main/update', 'MainController@index');
+Route::post('main/update', 'MainController@update')->name('main.update');
 
 Route::resource('events', 'EventsController');
 Route::resource('positions', 'PositionsController');
