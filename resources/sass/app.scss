@@ -451,6 +451,12 @@ textarea{
         }
     }
 
+    &__new{
+        &_hidden{
+            display: none;
+        }
+    }
+
     & select{
         font-size: 18px;
         line-height: 24px;
