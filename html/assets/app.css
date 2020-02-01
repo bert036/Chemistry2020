@@ -325,6 +325,8 @@ textarea {
         .settings__about textarea {
           font-size: 16px;
           line-height: 22px; } }
+  .settings__new_hidden {
+    display: none; }
   .settings select {
     font-size: 18px;
     line-height: 24px; }
