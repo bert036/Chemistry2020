@@ -13,6 +13,7 @@
 
 Route::get('/', 'WelcomeController@index')->name('welcome.index');
 Route::get('step1', 'WelcomeController@step1')->name('welcome.step1');
+Route::get('step1b', 'WelcomeController@step1');
 Route::get('step2', 'WelcomeController@step1');
 Route::get('step3', 'WelcomeController@step1');
 Route::get('about', 'WelcomeController@about')->name('welcome.about');
