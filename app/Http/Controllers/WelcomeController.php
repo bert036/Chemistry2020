@@ -42,6 +42,7 @@ class WelcomeController extends Controller
 			$squery->description = $request->post('description');
 			$squery->save();
 			
+			$this->SetSessionData('has_search_query', true);	
 			return $this->commonStep2Logic();
 		}		
 		return view('welcome.index');

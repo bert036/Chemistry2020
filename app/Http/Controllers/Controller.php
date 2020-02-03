@@ -80,7 +80,9 @@ class Controller extends BaseController
 				return view('welcome.step1')->with('events', $eventsKvps)->
 				with('positions', $positionsKvps)->
 				with('positionsWithEndings', $positionsWithEndingsKvps);	
-			}			
+			}
+			
+			$this->SetSessionData('has_search_query', true);			
 			return $this->commonStep2Logic();
 		}		
 		return view('welcome.index');

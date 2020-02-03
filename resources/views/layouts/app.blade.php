@@ -15,7 +15,7 @@
         <a href="https://chmstr.ru" class="typo header__logo">Химия</a>
     </div>
 
-    @if (Session::has('id'))
+    @if (Session::has('id') && Session::has('has_search_query'))
         <div class="nav">
             <a class="nav__item nav__item_search" href="{{ route('main.index') }}" title="Поиск"></a>
             <a class="nav__item nav__item_profile" href="{{ route('main.settings') }}"  title="Настройки"></a>
