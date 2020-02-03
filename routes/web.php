@@ -18,6 +18,7 @@ Route::get('step3', 'WelcomeController@step1');
 Route::get('about', 'WelcomeController@about')->name('welcome.about');
 Route::get('logout', 'WelcomeController@logout')->name('welcome.logout');
 
+Route::post('step1b', 'WelcomeController@step1b')->name('welcome.step1b');
 Route::post('step2', 'WelcomeController@step2')->name('welcome.step2');
 Route::post('step3', 'WelcomeController@step3')->name('welcome.step3');
 

@@ -7,7 +7,7 @@
 <div class="content">
 	<div class="search typo typo_h1">
 
-		{!! Form::open(['route' => 'welcome.step2'], ['class' => 'form']) !!}
+		{!! Form::open(['route' => 'welcome.step1b'], ['class' => 'form']) !!}
 
 		<div class="search__line">
 			Я {!! Form::select('self_position', $positions, null) !!},

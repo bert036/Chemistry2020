@@ -82,7 +82,7 @@ class Controller extends BaseController
 				with('positionsWithEndings', $positionsWithEndingsKvps);	
 			}
 			
-			$this->SetSessionData('has_search_query', true);			
+			$this->SetSessionData(1, 'has_search_query');			
 			return $this->commonStep2Logic();
 		}		
 		return view('welcome.index');

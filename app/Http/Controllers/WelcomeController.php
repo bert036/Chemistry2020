@@ -22,6 +22,7 @@ class WelcomeController extends Controller
 	function logout()
 	{
 		$this->ClearSessionData();
+		$this->ClearSessionData('has_search_query');
 		return view('welcome.index');
 	}
 	
@@ -30,7 +31,7 @@ class WelcomeController extends Controller
 		return $this->commonStep1Logic();
 	}
 
-	function step2(Request $request)
+	function step1b(Request $request)
 	{
 		if ($this->HasSessionData())
 		{
@@ -39,10 +40,22 @@ class WelcomeController extends Controller
 			$squery->self_position_id = $request->post('self_position');
 			$squery->search_position_id = $request->post('search_position');
 			$squery->event_id = $request->post('event');
-			$squery->description = $request->post('description');
 			$squery->save();
 			
-			$this->SetSessionData('has_search_query', true);	
+			$this->SetSessionData(1, 'has_search_query');		
+			return view('welcome.step1b');
+		}		
+		return view('welcome.index');
+	}
+	
+	function step2(Request $request)
+	{
+		if ($this->HasSessionData())
+		{
+			$squery = SearchQuery::where('is_active', 1)->where('account_id', $this->GetSessionData())->first();
+			$squery->description = $request->post('description');
+			$squery->save();
+				
 			return $this->commonStep2Logic();
 		}		
 		return view('welcome.index');
