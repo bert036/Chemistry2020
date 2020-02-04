@@ -19,7 +19,7 @@
         <div class="nav">
             <a class="nav__item nav__item_search" href="{{ route('main.index') }}" title="Поиск"></a>
             <a class="nav__item nav__item_profile" href="{{ route('main.settings') }}"  title="Настройки"></a>
-            <a class="nav__item nav__item_more" href="{{ route('welcome.about') }}"  title="О приложении"></a>
+            <a class="nav__item nav__item_more" href="{{ route('about.index') }}"  title="О приложении"></a>
         </div>
     @endif
 

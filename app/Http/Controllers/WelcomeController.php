@@ -14,11 +14,6 @@ class WelcomeController extends Controller
 		return $this->commonStep0Logic();
 	}
 	
-	function about()
-	{
-		return view('welcome.about');
-	}
-	
 	function logout()
 	{
 		$this->ClearSessionData();
