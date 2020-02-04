@@ -8,7 +8,7 @@
 			{!! Form::open(['route' => 'about.update', 'class' => 'form']) !!}
 
             <div class="typo typo_h2">
-                {!! Form::textarea('description', $description->content,['class' => 'form-control input-lg','placeholder' => 'Возможно, вам есть что добавить?', 'cols' => '', 'rows' => '']) !!}
+                {!! Form::textarea('description', $description ? $description->content : null,['class' => 'form-control input-lg','placeholder' => 'Возможно, вам есть что добавить?', 'cols' => '', 'rows' => '']) !!}
             </div>
             
 			<div class="settings__contacts">
