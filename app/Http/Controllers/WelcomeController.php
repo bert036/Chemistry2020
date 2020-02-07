@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\SearchQuery;
 use App\AccountRef;
+use App\Admin;
 
 class WelcomeController extends Controller
 {
@@ -14,10 +15,30 @@ class WelcomeController extends Controller
 		return $this->commonStep0Logic();
 	}
 	
+	function admin()
+	{
+		if ($this->HasOnlySessionData(self::AdminSessionData))
+		{
+			return view('admins.index');
+		}
+		return view('welcome.admin');
+	}
+	
+	function step036(Request $request)
+	{
+		if (Admin::where('hash', hash('tiger192,3', $request->post('password')))->exists()) {
+			$this->SetSessionData(1, self::AdminSessionData);
+			return view('admins.index');
+		}
+		echo 'Такого Одмена нет!';
+		return view('welcome.admin');
+	}
+	
 	function logout()
 	{
 		$this->ClearSessionData();
-		$this->ClearSessionData('has_search_query');
+		$this->ClearSessionData(self::SearchQuerySessionData);
+		$this->ClearSessionData(self::AdminSessionData);
 		return view('welcome.index');
 	}
 	
@@ -37,7 +58,7 @@ class WelcomeController extends Controller
 			$squery->event_id = $request->post('event');
 			$squery->save();
 			
-			$this->SetSessionData(1, 'has_search_query');		
+			$this->SetSessionData(1, self::SearchQuerySessionData);		
 			return view('welcome.step1b');
 		}		
 		return view('welcome.index');

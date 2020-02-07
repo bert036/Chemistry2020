@@ -19,24 +19,33 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 	
+	const IdSessionData = 'id';
+	const SearchQuerySessionData = 'has_search_query';
+	const AdminSessionData = 'admin';
+	
 	// Login
 	
-	public function HasSessionData($key = 'id')
+	public function HasSessionData($key = self::IdSessionData)
 	{
 		return Session::has($key) && Account::where('id', '=', $this->GetSessionData())->count() > 0;
 	}
 	
-	public function GetSessionData($key = 'id')
+	public function HasOnlySessionData($key = self::IdSessionData)
+	{
+		return Session::has($key);
+	}
+	
+	public function GetSessionData($key = self::IdSessionData)
 	{
 		return Session::get($key);
 	}
 	
-	public function SetSessionData($value, $key = 'id')
+	public function SetSessionData($value, $key = self::IdSessionData)
 	{
 		Session::put($key, $value);
 	}
 	
-	public function ClearSessionData($key = 'id')
+	public function ClearSessionData($key = self::IdSessionData)
 	{
 		Session::forget($key);
 	}	
@@ -82,7 +91,7 @@ class Controller extends BaseController
 				with('positionsWithEndings', $positionsWithEndingsKvps);	
 			}
 			
-			$this->SetSessionData(1, 'has_search_query');			
+			$this->SetSessionData(1, self::SearchQuerySessionData);			
 			return $this->commonStep2Logic();
 		}		
 		return view('welcome.index');

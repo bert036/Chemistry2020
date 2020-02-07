@@ -14,8 +14,12 @@ class PositionsController extends Controller
      */
     public function index()
     {
-		$positions = Position::where('is_active', 1)->simplePaginate(10);
-		return view('positions.index')->with('positions', $positions);
+		if ($this->HasOnlySessionData(self::AdminSessionData))
+		{
+			$positions = Position::where('is_active', 1)->simplePaginate(10);
+			return view('positions.index')->with('positions', $positions);
+		}
+		return view('welcome.admin');
     }
 
     /**
@@ -25,7 +29,11 @@ class PositionsController extends Controller
      */
     public function create()
     {
-		return view('positions.create');
+		if ($this->HasOnlySessionData(self::AdminSessionData))
+		{
+			return view('positions.create');
+		}
+		return view('welcome.admin');
     }
 
     /**
@@ -36,13 +44,17 @@ class PositionsController extends Controller
      */
     public function store(Request $request)
     {
-		$position = new Position;
-		$position->description = $request->post('description');
-		$position->order = $request->post('order');
-		$position->ending = $request->post('ending');
-		$position->save();
+		if ($this->HasOnlySessionData(self::AdminSessionData))
+		{
+			$position = new Position;
+			$position->description = $request->post('description');
+			$position->order = $request->post('order');
+			$position->ending = $request->post('ending');
+			$position->save();
 
-		return redirect()->route('positions.index');
+			return redirect()->route('positions.index');
+		}
+		return view('welcome.admin');
     }
 
     /**
@@ -64,8 +76,12 @@ class PositionsController extends Controller
      */
     public function edit($id)
     {
-		$position = Position::findOrFail($id);
-		return view('positions.edit')->with('position', $position);
+		if ($this->HasOnlySessionData(self::AdminSessionData))
+		{
+			$position = Position::findOrFail($id);
+			return view('positions.edit')->with('position', $position);
+		}
+		return view('welcome.admin');
     }
 
     /**
@@ -77,12 +93,16 @@ class PositionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-		$position = Position::findOrFail($id);
-		$position->update([
-		'description' => $request->post('description'),
-		'order' => $request->post('order'),
-		'ending' => $request->post('ending')]);		
-		return redirect()->route('positions.index');
+		if ($this->HasOnlySessionData(self::AdminSessionData))
+		{
+			$position = Position::findOrFail($id);
+			$position->update([
+			'description' => $request->post('description'),
+			'order' => $request->post('order'),
+			'ending' => $request->post('ending')]);		
+			return redirect()->route('positions.index');
+		}
+		return view('welcome.admin');
     }
 
     /**
@@ -93,8 +113,12 @@ class PositionsController extends Controller
      */
     public function destroy($id)
     {
-		$position = Position::findOrFail($id);
-		$position->update(['is_active' => false]);	
-		return redirect()->route('positions.index');
+		if ($this->HasOnlySessionData(self::AdminSessionData))
+		{
+			$position = Position::findOrFail($id);
+			$position->update(['is_active' => false]);	
+			return redirect()->route('positions.index');
+		}
+		return view('welcome.admin');
     }
 }
