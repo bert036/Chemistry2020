@@ -1,0 +1,64 @@
+bert123@yandex.ru
+Justbreathe036Bert
+
+main ssh
+n1h09aqhqg
+private key phrase qwer
+
+1) Root and Root password
+In vscale console after entering root
+sudo passwd root // password qwerty123
+
+2) sudo apt-get update && sudo apt-get upgrade
+
+3) Install apps
+sudo apt-get install git
+sudo apt-get install mc
+sudo apt-get install lynx
+
+4) Apache and Apache user 
+sudo apt-get install apache2 (runnins as www-data user)
+chown -R www-data:www-data /var/www/mysite
+chmod -R og-r /var/www/mysite
+
+5) SSl for Https
+Create SSL Certificate and Configure in Apache
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-16-04
+
+6) MySql
+https://www.digitalocean.com/community/tutorials/mysql-ubuntu-18-04-ru
+sudo apt-get install mysql-server
+mysql -u root -p (password qwerty)
+mysql>create database chemistry;
+mysql>use chemistry;
+!!! All scripts from https://github.com/klauth86/Laravel/tree/master/SQL
+sudo systemctl restart mysql;
+
+7) Clone repo
+/var/www# git clone https://github.com/bert036/Chemistry2020.git rep
+скопировать содержимое репозитория в корневой каталог Apache
+!!! cp /var/www#/rep /var/www#/
+
+8) Php
+Install Basic 7.2
+https://linuxize.com/post/how-to-install-php-on-ubuntu-18-04/
+Update to 7.4
+https://www.cloudbooklet.com/upgrade-php-version-to-php-7-4-on-ubuntu/
+
+9) Composer
+(https://linuxize.com/post/how-to-install-and-use-composer-on-ubuntu-18-04/)
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+10) Set up htaccess (https://www.linode.com/docs/web-servers/apache/how-to-set-up-htaccess-on-apache/)
+
+11) LARAVEL
+composer create-project laravel/laravel Test 4.2 --prefer-dist (https://laravel.com/docs/4.2) 
+/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+/sbin/mkswap /var/swap.1
+/sbin/swapon /var/swap.1
+
+https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost
+
+12) Pull project dependencies
+composer update in Project root folder
