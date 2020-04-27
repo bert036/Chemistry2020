@@ -12,7 +12,7 @@
 <body>
 
     <div class="header">
-        <a href="https://chmstr.ru" class="typo header__logo">Химия</a>
+        <a href="https://chmstr.space" class="typo header__logo">Химия</a>
     </div>
 
     @if (Session::has('id') && Session::has('has_search_query'))
