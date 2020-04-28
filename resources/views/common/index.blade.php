@@ -11,7 +11,7 @@
 
 		<div class="form-group">
 			{!! Form::label('description', 'О проекте',['class' => 'control-label']) !!} <br/>
-			{!! Form::textarea('description', $item->description,['class' => 'form-control input-lg','placeholder' => 'О проекте ...']) !!}
+			{!! Form::textarea('description', $item ? $item->description : null,['class' => 'form-control input-lg','placeholder' => 'О проекте ...']) !!}
 		</div>
 
 		<div class="form-group">
