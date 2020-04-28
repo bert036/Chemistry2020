@@ -43,4 +43,7 @@ Route::post('main/update', 'MainController@update')->name('main.update');
 Route::resource('events', 'EventsController');
 Route::resource('positions', 'PositionsController');
 
+Route::get('common/update', 'CommonController@index');
+Route::post('common/update', 'CommonController@update')->name('common.update');
+
 Auth::routes();

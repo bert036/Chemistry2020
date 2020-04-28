@@ -13,6 +13,10 @@
             <a href="{{ route('positions.index') }}">Позиции</a>
         </div>
 		
+        <div class="auth__type typo typo_h1">
+            <a href="{{ route('common.update') }}">О проекте</a>
+        </div>
+		
     </div>
 </div>
 

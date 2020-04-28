@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\AboutInfo;
+use App\Common;
 
 use DB;
 
@@ -14,11 +15,15 @@ class AboutController extends Controller
 	const DescType = 'desc';
 	const RefType = 'ref';
 	
+	const Id = 'id';
+	const Description = 'description';
+	
+	const Id_Description = 'description';
+	
 	function index()
 	{
-		$desc = AboutInfo::where('type', self::DescType)->first();
-		$refs = AboutInfo::where('type', self::RefType)->get();		
-		return view('about.index')->with('description', $desc)->with('refs', $refs);
+		$item = Common::where(self::Id, self::Id_Description)->first();	
+		return view('about.index')->with('item', $item);
 	}
 	
 	function edit()
