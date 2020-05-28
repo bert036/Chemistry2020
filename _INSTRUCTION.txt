@@ -23,7 +23,10 @@ chmod -R og-r /var/www/mysite
 
 5) SSl for Https
 Create SSL Certificate and Configure in Apache
-https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-16-04
+	a) Full https
+		https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-16-04
+	b) Only for encrypted server
+		https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-16-04
 
 6) MySql
 https://www.digitalocean.com/community/tutorials/mysql-ubuntu-18-04-ru
